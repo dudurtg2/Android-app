@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="12dp"
-        android:onClick="connect"
+        android:onClick="Result"
         android:text="Mostrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="68dp"
-        android:onClick="inserir"
+        android:onClick="insert"
         android:text="Inserir"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
