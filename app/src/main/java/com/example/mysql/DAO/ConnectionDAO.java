@@ -1,13 +1,12 @@
-package com.example.mysql;
+package com.example.mysql.DAO;
 
 import android.util.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Objects;
 
-public class MYSQLconnection {
+public class ConnectionDAO {
     public Connection CONN(){
 
         String host, port, databaseName, userName, password;

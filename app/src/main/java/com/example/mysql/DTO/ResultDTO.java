@@ -5,6 +5,12 @@ public class ResultDTO {
     private String preso;
     private String estoque;
 
+    public ResultDTO(String nome, String preso, String estoque) {
+        this.nome = nome;
+        this.preso = preso;
+        this.estoque = estoque;
+    }
+
     public String getNome() {
         return nome;
     }
