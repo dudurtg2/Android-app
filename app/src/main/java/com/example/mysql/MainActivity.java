@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mysql.DAO.ConnectionDAO;
 import com.example.mysql.DAO.InsertDAO;
+import com.example.mysql.DAO.ResultDAO;
 import com.example.mysql.DTO.ResultDTO;
 
 import java.sql.Connection;
@@ -21,12 +22,11 @@ import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
     private EditText bnome, bpreco, bquantidade, blimpar;
-    ResultDTO resultDTO;
-    ConnectionDAO connectionDAO;
-    String name;
-    String preso;
-    String quantidade;
-    String id;
+    private TextView idd;
+    private TextView texto;
+    private TextView texto2;
+    private TextView texto3;
+    TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +35,12 @@ public class MainActivity extends AppCompatActivity {
         bpreco = findViewById(R.id.tpreco);
         blimpar = findViewById(R.id.tlimpar);
         bquantidade = findViewById(R.id.tquantidade);
-        connectionDAO = new ConnectionDAO();
-
+        idd = findViewById(R.id.id);
+        texto = findViewById(R.id.texto);
+        texto2 = findViewById(R.id.texto3);
+        texto3 = findViewById(R.id.texto2);
+        textView = findViewById(R.id.textView);
+        ResultDTO resultDTO = new ResultDTO("","","","");
     }
     public void insert(View v) {
         String nome = "Null", preso = "1", estoque = "1";
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         if (!bquantidade.getText().toString().isEmpty()) {
             estoque = bquantidade.getText().toString();
         }
-        TextView textView = findViewById(R.id.textView);
+
         query = "INSERT INTO " + table + " (`nome`,`preco`,`estoque`) VALUES (?,?,?)";
         insertDAO.executor(nome,preso,estoque,query);
         textView.setText(query);
@@ -101,55 +105,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    public void connect(View v) {
-//
-//            try {
-//                ArrayList<ResultDTO> resultDTO1 = new ResultDAO().lista(v);
-//            } catch (Exception e){
-//                showConnectionStatus(e.getMessage());
-//            }
-//
-//    }
-
     public void Resulta(View v) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(() -> {
-            Connection conn = null;
             try {
-                conn = connectionDAO.CONN();
-                String query = "SELECT * FROM tb_produtos";
-                PreparedStatement stmt = conn.prepareStatement(query);
-                ResultSet rs = stmt.executeQuery();
-                StringBuilder bStr = new StringBuilder("NOME:\n");
-                StringBuilder bStr2 = new StringBuilder("PREÇO:\n");
-                StringBuilder bStr3 = new StringBuilder("QUANTIDADE:\n");
-                StringBuilder bStr4 = new StringBuilder("ID:\n");
-                while (rs.next()){
-                    bStr4.append(rs.getString("id")).append("\n");
-                    bStr.append(rs.getString("nome")).append("\n");
-                    bStr2.append(rs.getString("preco")).append("\n");
-                    bStr3.append(rs.getString("estoque")).append("\n");
-                }
-                id = bStr4.toString();
-                name = bStr.toString();
-                preso = bStr2.toString();
-                quantidade = bStr3.toString();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+                ResultDTO resultDTO = new ResultDAO().connect();
+                idd.setText(ResultDTO.getIdd());
+                texto.setText(resultDTO.getNome());
+                texto2.setText(resultDTO.getPreso());
+                texto3.setText(resultDTO.getEstoque());
+            } catch (Exception e){
+                textView.setText(e.getMessage());
             }
 
-            runOnUiThread(()->{
-                TextView ida = findViewById(R.id.id);
-                ida.setText(id);
-                TextView texto = findViewById(R.id.texto);
-                texto.setText(name);
-                TextView texto2 = findViewById(R.id.texto3);
-                texto2.setText(preso);
-                TextView texto3 = findViewById(R.id.texto2);
-                texto3.setText(quantidade);
-            });
-        });
     }
+
     private void showConnectionStatus(String message) {
         runOnUiThread(() -> Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show());
     }

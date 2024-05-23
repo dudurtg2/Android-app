@@ -1,14 +1,26 @@
 package com.example.mysql.DTO;
 
-public class ResultDTO {
-    private String nome;
-    private String preso;
-    private String estoque;
+import com.example.mysql.DAO.ResultDAO;
 
-    public ResultDTO(String nome, String preso, String estoque) {
-        this.nome = nome;
-        this.preso = preso;
-        this.estoque = estoque;
+public  class ResultDTO {
+    private static String nome = "null";
+    private static String preso = "null";
+    private static String estoque = "null";
+    private static String idd = "null";
+
+    public static String getIdd() {
+        return idd;
+    }
+
+    public static void setIdd(String idd) {
+        ResultDTO.idd = idd;
+    }
+
+    public ResultDTO(String nome, String preso, String estoque,String idd) {
+        ResultDTO.nome = nome;
+        ResultDTO.preso = preso;
+        ResultDTO.estoque = estoque;
+        ResultDTO.idd = idd;
     }
 
     public String getNome() {
@@ -16,7 +28,7 @@ public class ResultDTO {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        ResultDTO.nome = nome;
     }
 
     public String getPreso() {
@@ -24,7 +36,7 @@ public class ResultDTO {
     }
 
     public void setPreso(String preso) {
-        this.preso = preso;
+        ResultDTO.preso = preso;
     }
 
     public String getEstoque() {
@@ -32,6 +44,6 @@ public class ResultDTO {
     }
 
     public void setEstoque(String estoque) {
-        this.estoque = estoque;
+        ResultDTO.estoque = estoque;
     }
 }
