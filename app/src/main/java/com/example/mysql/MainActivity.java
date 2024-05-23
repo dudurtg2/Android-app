@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView texto2;
     private TextView texto3;
     TextView textView;
+    ResultDTO resultDTO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         texto2 = findViewById(R.id.texto3);
         texto3 = findViewById(R.id.texto2);
         textView = findViewById(R.id.textView);
-        ResultDTO resultDTO = new ResultDTO("","","","");
     }
     public void insert(View v) {
         String nome = "Null", preso = "1", estoque = "1";
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void Resulta(View v) {
             try {
-                ResultDTO resultDTO = new ResultDAO().connect();
+                resultDTO = new ResultDAO().connect();
                 idd.setText(ResultDTO.getIdd());
                 texto.setText(resultDTO.getNome());
                 texto2.setText(resultDTO.getPreso());

@@ -41,9 +41,9 @@ public class ResultDAO {
                     bStr2.append(rs.getString("preco")).append("\n");
                     bStr3.append(rs.getString("estoque")).append("\n");
                 }
-                while (!resultDTO.getNome().equals("")){
-                    resultDTO = new ResultDTO(bStr.toString(),bStr2.toString(),bStr3.toString(),bStr4.toString());
-                }
+
+                resultDTO = new ResultDTO(bStr.toString(),bStr2.toString(),bStr3.toString(),bStr4.toString());
+
 
 
             } catch (SQLException e) {
