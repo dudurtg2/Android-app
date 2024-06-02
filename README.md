@@ -28,7 +28,7 @@ Descrição:
 ## **Configuração**
 -  Clone o Repositório
 ```
-  git clone https://github.com/seu-usuario/android-mysql-app.git
+  git clone https://github.com/dudurtg2/android-mysql-app.git
   cd android-mysql-app
 ```
 ### Configuração do Banco de Dados
